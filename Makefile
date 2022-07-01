@@ -1,13 +1,16 @@
 test:
 	./gradlew test
 
-start:
+run:
 	./gradlew run
 
-start-prod:
+run-dist:
 	app/build/install/app/bin/app
 
 build:
 	./gradlew clean && ./gradlew installDist
+
+check:
+	./gradlew check
 
 .PHONY: test

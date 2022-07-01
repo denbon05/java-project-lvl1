@@ -3,12 +3,68 @@
  */
 package hexlet.code;
 
+import hexlet.code.games.Even;
+import hexlet.code.interfaces.Game;
+
 public class App {
-    public String getGreeting() {
-        return "Welcome to the Brain Games!";
+    private static String userName;
+    private static short gameNumber;
+    private static String[] games = {
+        "Exit", "Greet", "Even"
+    };
+    private static final short ATTEMPTS_COUNT = 3;
+
+    public static void greetingInGame() {
+        System.out.println("Welcome to the Brain Games!");
+    }
+
+    public static void greetingUser() {
+        System.out.println("Hello, " + userName + "!");
+    }
+
+    public static void greeting() {
+        App.greetingInGame();
+        userName = Cli.promptUserName();
+        App.greetingUser();
+    }
+
+    public static void launchGame(Game game) {
+        game.displayRules();
+        for (short attemptNum = 1; attemptNum <= ATTEMPTS_COUNT; attemptNum += 1) {
+            final boolean isRightAnswer = game.run();
+            if (!isRightAnswer) {
+                System.out.println("Let's try again, " + userName + "!");
+                return;
+            }
+        }
+
+        System.out.println("Congratulations, " + userName + "!");
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        final short exitIdx = 0;
+        final short greetingIdx = 1;
+        final short evenIdx = 2;
+
+        gameNumber = Cli.promptGame(games, exitIdx);
+
+        if (gameNumber == exitIdx) {
+            return;
+        }
+
+        if (gameNumber == greetingIdx) {
+            App.greeting();
+            return;
+        }
+
+        App.greeting();
+
+        switch (gameNumber) {
+            case evenIdx:
+                App.launchGame(new Even());
+                break;
+            default:
+                System.out.println("There is no such game");
+        }
     }
 }

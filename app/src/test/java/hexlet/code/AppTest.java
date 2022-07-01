@@ -3,13 +3,23 @@
  */
 package hexlet.code;
 
-import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.junit.jupiter.api.Test;
 
 class AppTest {
     @Test
-    void appHasAGreeting() {
-        App app = new App();
-        assertThat(app.getGreeting()).isEqualTo("Welcome to the Brain Games!");
+    void userGreeting() {
+        App.greetingInGame();
+        final String expected = "Welcome to the Brain Games!";
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        App.greetingInGame();
+        final var actual = out.toString().trim();
+
+        assertThat(actual).isEqualTo(expected);
     }
 }

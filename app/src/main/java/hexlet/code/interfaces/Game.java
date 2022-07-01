@@ -3,5 +3,7 @@ package hexlet.code.interfaces;
 public interface Game {
     void displayRules();
 
-    boolean run();
+    String getQuestion();
+
+    String getCorrectAnswer(String question);
 }

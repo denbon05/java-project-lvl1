@@ -3,16 +3,16 @@
  */
 package hexlet.code;
 
+
+import hexlet.code.games.Calc;
 import hexlet.code.games.Even;
-import hexlet.code.interfaces.Game;
 
 public class App {
     private static String userName;
-    private static short gameNumber;
+    private static int gameNumber;
     private static String[] games = {
-        "Exit", "Greet", "Even"
+        "Exit", "Greet", "Even", "Calc"
     };
-    private static final short ATTEMPTS_COUNT = 3;
 
     public static void greetingInGame() {
         System.out.println("Welcome to the Brain Games!");
@@ -28,23 +28,11 @@ public class App {
         App.greetingUser();
     }
 
-    public static void launchGame(Game game) {
-        game.displayRules();
-        for (short attemptNum = 1; attemptNum <= ATTEMPTS_COUNT; attemptNum += 1) {
-            final boolean isRightAnswer = game.run();
-            if (!isRightAnswer) {
-                System.out.println("Let's try again, " + userName + "!");
-                return;
-            }
-        }
-
-        System.out.println("Congratulations, " + userName + "!");
-    }
-
     public static void main(String[] args) {
-        final short exitIdx = 0;
-        final short greetingIdx = 1;
-        final short evenIdx = 2;
+        final int exitIdx = 0;
+        final int greetingIdx = 1;
+        final int evenIdx = 2;
+        final int calcIdx = 3;
 
         gameNumber = Cli.promptGame(games, exitIdx);
 
@@ -61,8 +49,10 @@ public class App {
 
         switch (gameNumber) {
             case evenIdx:
-                App.launchGame(new Even());
+                Engine.launchGame(new Even(), userName);
                 break;
+            case calcIdx:
+                Engine.launchGame(new Calc(), userName);
             default:
                 System.out.println("There is no such game");
         }

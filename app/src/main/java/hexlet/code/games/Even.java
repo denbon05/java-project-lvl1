@@ -1,48 +1,31 @@
 package hexlet.code.games;
 
-import java.util.Scanner;
-
 import hexlet.code.interfaces.Game;
 
-public class Even implements Game {
-    private static Scanner scanner = new Scanner(System.in);
+public final class Even implements Game {
+    private String positiveAnswer = "yes";
+    private String negativeAnswer = "no";
+    private static final int MIN_NUM = 0;
+    private static final int MAX_NUM = 100;
 
-    private int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
+    private int getRandomNumber() {
+        return (int) ((Math.random() * (MAX_NUM - MIN_NUM)) + MIN_NUM);
     }
 
     private boolean isNumberEven(int num) {
         return num % 2 == 0;
     }
 
-    public final void displayRules() {
+    public void displayRules() {
         System.out.println("Answer 'yes' if number even otherwise answer 'no'.");
     }
 
-    /* (non-Javadoc)
-     * Run the Even game
-     */
-    public final boolean run() {
-        final int num = this.getRandomNumber(0, 100);
-        final boolean isEvenNum = this.isNumberEven(num);
-        final String positiveAnswer = "yes";
-        final String negativeAnswer = "no";
+    public String getQuestion() {
+        return "" + this.getRandomNumber();
+    }
 
-        System.out.println("Question: " + num);
-        System.out.print("Your answer: ");
-        String answer = scanner.next();
-        final boolean isAnswerCorrect = (answer.equals(positiveAnswer) && isEvenNum)
-                || (answer.equals(negativeAnswer) && !isEvenNum);
-        final String correctAnswer = isEvenNum ? positiveAnswer : negativeAnswer;
-
-        if (isAnswerCorrect) {
-            System.out.println("Correct");
-            return true;
-        }
-
-        System.out.println(
-                "'" + answer + "'" + "is wrong answer ;(. Correct answer was"
-                        + "'" + correctAnswer + "'.");
-        return false;
+    public String getCorrectAnswer(String question) {
+        final boolean isEvenNum = this.isNumberEven(Integer.parseInt(question));
+        return isEvenNum ? positiveAnswer : negativeAnswer;
     }
 }

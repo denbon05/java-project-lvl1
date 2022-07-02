@@ -18,3 +18,7 @@
 ## GCD game
 
 [![asciicast](https://asciinema.org/a/505634.svg)](https://asciinema.org/a/505634)
+
+## Progressive game
+
+[![asciicast](https://asciinema.org/a/505649.svg)](https://asciinema.org/a/505649)

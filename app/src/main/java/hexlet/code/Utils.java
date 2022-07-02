@@ -5,6 +5,10 @@ public class Utils {
     private static final int MAX_NUM = 100;
 
     public static int getRandomNumber() {
-        return (int) ((Math.random() * (MAX_NUM - MIN_NUM)) + MIN_NUM);
+        return getRandomNumber(MIN_NUM, MAX_NUM);
+    }
+
+    public static int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 }

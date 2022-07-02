@@ -14,6 +14,8 @@ public final class Calc implements Game {
     private static final char MULTIPLE = '*';
     private final char[] operators = {PLUS, MINUS, MULTIPLE};
 
+    private static final String SEPARATOR = " ";
+
     private char getRandomOperator() {
         final int fromIdx = 0;
         final int operatorsCount = this.operators.length;
@@ -29,11 +31,11 @@ public final class Calc implements Game {
         final int num1 = Utils.getRandomNumber();
         final int num2 = Utils.getRandomNumber();
         final char operator = this.getRandomOperator();
-        return num1 + " " + operator + " " + num2;
+        return num1 + SEPARATOR + operator + SEPARATOR + num2;
     }
 
     public String getCorrectAnswer(String question) {
-        String[] dividedExpression = question.split(" ");
+        String[] dividedExpression = question.split(SEPARATOR);
 
         final int num1 = Integer.parseInt(dividedExpression[NUM1_IDX]);
         final int num2 = Integer.parseInt(dividedExpression[NUM2_IDX]);

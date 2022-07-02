@@ -6,12 +6,13 @@ package hexlet.code;
 
 import hexlet.code.games.Calc;
 import hexlet.code.games.Even;
+import hexlet.code.games.GCD;
 
 public class App {
     private static String userName;
     private static int gameNumber;
     private static String[] games = {
-        "Exit", "Greet", "Even", "Calc"
+        "Exit", "Greet", "Even", "Calc", "GCD"
     };
 
     public static void greetingInGame() {
@@ -33,6 +34,7 @@ public class App {
         final int greetingIdx = 1;
         final int evenIdx = 2;
         final int calcIdx = 3;
+        final int gcdIdx = 4;
 
         gameNumber = Cli.promptGame(games, exitIdx);
 
@@ -53,6 +55,8 @@ public class App {
                 break;
             case calcIdx:
                 Engine.launchGame(new Calc(), userName);
+            case gcdIdx:
+                Engine.launchGame(new GCD(), userName);
             default:
                 System.out.println("There is no such game");
         }

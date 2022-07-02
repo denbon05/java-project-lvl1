@@ -1,16 +1,11 @@
 package hexlet.code.games;
 
+import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
 
 public final class Even implements Game {
     private String positiveAnswer = "yes";
     private String negativeAnswer = "no";
-    private static final int MIN_NUM = 0;
-    private static final int MAX_NUM = 100;
-
-    private int getRandomNumber() {
-        return (int) ((Math.random() * (MAX_NUM - MIN_NUM)) + MIN_NUM);
-    }
 
     private boolean isNumberEven(int num) {
         return num % 2 == 0;
@@ -21,7 +16,7 @@ public final class Even implements Game {
     }
 
     public String getQuestion() {
-        return "" + this.getRandomNumber();
+        return "" + Utils.getRandomNumber();
     }
 
     public String getCorrectAnswer(String question) {

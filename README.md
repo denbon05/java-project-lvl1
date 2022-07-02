@@ -22,3 +22,7 @@
 ## Progressive game
 
 [![asciicast](https://asciinema.org/a/505649.svg)](https://asciinema.org/a/505649)
+
+## Prime game
+
+[![asciicast](https://asciinema.org/a/505660.svg)](https://asciinema.org/a/505660)

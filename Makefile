@@ -5,7 +5,7 @@ run:
 	./gradlew run
 
 run-dist:
-	app/build/install/app/bin/app
+	./build/install/app/bin/app
 
 build:
 	./gradlew clean && ./gradlew installDist

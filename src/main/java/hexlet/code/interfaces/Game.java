@@ -1,9 +1,9 @@
 package hexlet.code.interfaces;
 
+import java.util.HashMap;
+
 public interface Game {
     void displayRules();
 
-    String getQuestion();
-
-    String getCorrectAnswer(String question);
+    HashMap<GameDataKeys, String> run();
 }

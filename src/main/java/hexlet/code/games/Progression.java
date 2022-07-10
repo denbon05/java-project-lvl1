@@ -1,7 +1,10 @@
 package hexlet.code.games;
 
+import java.util.HashMap;
+
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
+import hexlet.code.interfaces.GameDataKeys;
 
 public final class Progression implements Game {
     private static final int MIN_PROGRESSION_LENGTH = 5;
@@ -10,34 +13,32 @@ public final class Progression implements Game {
     private static final int MAX_PROGRESSION_STEP = 5;
 
     private static final String GAP = "..";
-    private static final String SEPARATOR = " ";
-    private int correctAnswer;
 
     public void displayRules() {
         System.out.println("What number is missing in the progression?");
     }
 
-    public String getQuestion() {
-        final int progressionLength = Utils.getRandomNumber(MIN_PROGRESSION_LENGTH, MAX_PROGRESSION_LENGTH);
-        final int gapIdx = Utils.getRandomNumber(0, progressionLength);
-        final String[] progression = new String[progressionLength];
-        final int progressionStep = Utils.getRandomNumber(MIN_PROGRESSION_STEP, MAX_PROGRESSION_STEP);
+    public HashMap<GameDataKeys, String> run() {
+        HashMap<GameDataKeys, String> result = new HashMap<>();
+
+        int progressionLength = Utils.getRandomNumber(MIN_PROGRESSION_LENGTH, MAX_PROGRESSION_LENGTH);
+        int gapIdx = Utils.getRandomNumber(0, progressionLength);
+        String[] progression = new String[progressionLength];
+        int progressionStep = Utils.getRandomNumber(MIN_PROGRESSION_STEP, MAX_PROGRESSION_STEP);
         int progressionNum = Utils.getRandomNumber();
 
         for (int i = 0; i < progressionLength; i += 1) {
             if (i == gapIdx) {
                 progression[i] = GAP;
-                correctAnswer = progressionNum;
+                result.put(GameDataKeys.answer,  String.valueOf(progressionNum));
             } else {
-                progression[i] = "" + progressionNum;
+                progression[i] = String.valueOf(progressionNum);
             }
             progressionNum += progressionStep;
         }
 
-        return String.join(SEPARATOR, progression);
-    }
+        result.put(GameDataKeys.question, String.join(" ", progression));
 
-    public String getCorrectAnswer(String question) {
-        return "" + correctAnswer;
+        return result;
     }
 }

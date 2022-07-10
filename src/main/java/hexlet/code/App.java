@@ -4,6 +4,8 @@
 package hexlet.code;
 
 
+import java.util.Scanner;
+
 import hexlet.code.games.Calc;
 import hexlet.code.games.Even;
 import hexlet.code.games.GCD;
@@ -11,63 +13,64 @@ import hexlet.code.games.Prime;
 import hexlet.code.games.Progression;
 
 public class App {
-    private static String userName;
+    private static final int EXIT_IDX = 0;
+    private static final int GREETING_IDX = 1;
+    private static final int EVEN_IDX = 2;
+    private static final int CALC_IDX = 3;
+    private static final int GCD_IDX = 4;
+    private static final int PROGRESSION_IDX = 5;
+    private static final int PRIME_IDX = 6;
+
+    private static Scanner scanner = new Scanner(System.in);
     private static int gameNumber;
     private static String[] games = {
         "Exit", "Greet", "Even", "Calc", "GCD", "Progression", "Prime"
     };
 
-    public static void greetingInGame() {
-        System.out.println("Welcome to the Brain Games!");
-    }
-
-    public static void greetingUser() {
-        System.out.println("Hello, " + userName + "!");
-    }
-
-    public static void greeting() {
-        App.greetingInGame();
-        userName = Cli.promptUserName();
-        App.greetingUser();
-    }
-
     public static void main(String[] args) {
-        final int exitIdx = 0;
-        final int greetingIdx = 1;
-        final int evenIdx = 2;
-        final int calcIdx = 3;
-        final int gcdIdx = 4;
-        final int progressionIdx = 5;
-        final int primeIdx = 6;
 
-        gameNumber = Cli.promptGame(games, exitIdx);
+        System.out.println("Please enter the game number and press Enter.");
+        for (int i = 0; i < games.length; i += 1) {
+            if (EXIT_IDX == i) {
+                continue;
+            }
+            System.out.println(i + " - " + games[i]);
+        }
+        System.out.println(EXIT_IDX + " - " + games[EXIT_IDX]);
 
-        if (gameNumber == exitIdx) {
+        System.out.print("Your choice: ");
+        gameNumber = scanner.nextShort();
+        System.out.println();
+
+        if (gameNumber == EXIT_IDX) {
             return;
         }
 
-        if (gameNumber == greetingIdx) {
-            App.greeting();
+        Engine.greetingInGame();
+        String userName = Cli.promptUserName();
+        Engine.greetingUser(userName);
+
+        if (gameNumber == GREETING_IDX) {
             return;
         }
 
-        App.greeting();
+        Engine.setUserName(userName);
 
         switch (gameNumber) {
-            case evenIdx:
-                Engine.launchGame(new Even(), userName);
+            case EVEN_IDX:
+                Engine.launchGame(new Even());
                 break;
-            case calcIdx:
-                Engine.launchGame(new Calc(), userName);
+            case CALC_IDX:
+                Engine.launchGame(new Calc());
                 break;
-            case gcdIdx:
-                Engine.launchGame(new GCD(), userName);
+            case GCD_IDX:
+                Engine.launchGame(new GCD());
                 break;
-            case progressionIdx:
-                Engine.launchGame(new Progression(), userName);
+            case PROGRESSION_IDX:
+                Engine.launchGame(new Progression());
                 break;
-            case primeIdx:
-                Engine.launchGame(new Prime(), userName);
+            case PRIME_IDX:
+                Engine.launchGame(new Prime());
                 break;
             default:
                 System.out.println("There is no such game");

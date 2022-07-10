@@ -1,55 +1,55 @@
 package hexlet.code.games;
 
+import java.util.HashMap;
+
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
+import hexlet.code.interfaces.GameDataKeys;
 
 public final class Calc implements Game {
-    private static final int NUM1_IDX = 0;
-    private static final int NUM2_IDX = 2;
-    private static final int OPERATOR_IDX = 1;
-    private static final int OPERATOR_CHAR_IDX = 0;
-
     private static final char PLUS = '+';
     private static final char MINUS = '-';
     private static final char MULTIPLE = '*';
-    private final char[] operators = {PLUS, MINUS, MULTIPLE};
+    private char[] operators = {PLUS, MINUS, MULTIPLE};
 
     private static final String SEPARATOR = " ";
 
     private char getRandomOperator() {
-        final int fromIdx = 0;
-        final int operatorsCount = this.operators.length;
-        final int operatorIdx = (int) ((Math.random() * (operatorsCount - fromIdx) + fromIdx));
-        return this.operators[operatorIdx];
+        int fromIdx = 0;
+        int operatorsCount = operators.length;
+        int operatorIdx = Utils.getRandomNumber(fromIdx, operatorsCount);
+        return operators[operatorIdx];
     }
 
     public void displayRules() {
         System.out.println("What is the result of the expression?");
     }
 
-    public String getQuestion() {
-        final int num1 = Utils.getRandomNumber();
-        final int num2 = Utils.getRandomNumber();
-        final char operator = this.getRandomOperator();
-        return num1 + SEPARATOR + operator + SEPARATOR + num2;
-    }
+    public HashMap<GameDataKeys, String> run() {
+        HashMap<GameDataKeys, String> result = new HashMap<>();
 
-    public String getCorrectAnswer(String question) {
-        String[] dividedExpression = question.split(SEPARATOR);
+        int num1 = Utils.getRandomNumber();
+        int num2 = Utils.getRandomNumber();
+        char operator = this.getRandomOperator();
+        result.put(GameDataKeys.question, num1 + SEPARATOR + operator + SEPARATOR + num2);
 
-        final int num1 = Integer.parseInt(dividedExpression[NUM1_IDX]);
-        final int num2 = Integer.parseInt(dividedExpression[NUM2_IDX]);
-        final char operator = dividedExpression[OPERATOR_IDX].charAt(OPERATOR_CHAR_IDX);
-
+        String answerValue;
         switch (operator) {
             case PLUS:
-                return "" + (num1 + num2);
+                answerValue = String.valueOf(num1 + num2);
+                break;
             case MINUS:
-                return "" + (num1 - num2);
+                answerValue = String.valueOf(num1 - num2);
+                break;
             case MULTIPLE:
-                return "" + (num1 * num2);
+                answerValue = String.valueOf(num1 * num2);
+                break;
             default:
-                return "";
+                answerValue = "";
+                break;
         }
+        result.put(GameDataKeys.answer, answerValue);
+
+        return result;
     }
 }

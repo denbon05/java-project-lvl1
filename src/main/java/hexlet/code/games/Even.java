@@ -1,7 +1,10 @@
 package hexlet.code.games;
 
+import java.util.HashMap;
+
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
+import hexlet.code.interfaces.GameDataKeys;
 
 public final class Even implements Game {
     private String positiveAnswer = "yes";
@@ -15,12 +18,15 @@ public final class Even implements Game {
         System.out.println("Answer 'yes' if number even otherwise answer 'no'.");
     }
 
-    public String getQuestion() {
-        return "" + Utils.getRandomNumber();
-    }
+    public HashMap<GameDataKeys, String> run() {
+        HashMap<GameDataKeys, String> result = new HashMap<>();
 
-    public String getCorrectAnswer(String question) {
-        final boolean isEvenNum = this.isNumberEven(Integer.parseInt(question));
-        return isEvenNum ? positiveAnswer : negativeAnswer;
+        int num = Utils.getRandomNumber();
+        result.put(GameDataKeys.question, String.valueOf(num));
+
+        boolean isEvenNum = this.isNumberEven(num);
+        result.put(GameDataKeys.answer, isEvenNum ? positiveAnswer : negativeAnswer);
+
+        return result;
     }
 }

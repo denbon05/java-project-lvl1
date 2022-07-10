@@ -1,7 +1,10 @@
 package hexlet.code.games;
 
+import java.util.HashMap;
+
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
+import hexlet.code.interfaces.GameDataKeys;
 
 public final class Prime implements Game {
     private String positiveAnswer = "yes";
@@ -11,23 +14,25 @@ public final class Prime implements Game {
         System.out.println("Answer 'yes' if given number is prime. Otherwise answer 'no'.");
     }
 
-    public String getQuestion() {
-        return "" + Utils.getRandomNumber();
-    }
+    public HashMap<GameDataKeys, String> run() {
+        HashMap<GameDataKeys, String> result = new HashMap<>();
+        int num = Utils.getRandomNumber();
+        result.put(GameDataKeys.question, String.valueOf(num));
 
-    public String getCorrectAnswer(String question) {
-        final int num = Integer.parseInt(question);
-
+        String answer;
         if (num < 2) {
-            return negativeAnswer;
-        }
+            answer = negativeAnswer;
+        } else {
+            answer = positiveAnswer;
 
-        for (int n = 2; n < num / 2; n += 1) {
-            if (num % n == 0) {
-                return negativeAnswer;
+            for (int n = 2; n < num / 2; n += 1) {
+                if (num % n == 0) {
+                    answer = negativeAnswer;
+                }
             }
         }
+        result.put(GameDataKeys.answer, answer);
 
-        return positiveAnswer;
+        return result;
     }
 }

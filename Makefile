@@ -13,4 +13,4 @@ build:
 check:
 	./gradlew check
 
-.PHONY: test
+.PHONY: test, build

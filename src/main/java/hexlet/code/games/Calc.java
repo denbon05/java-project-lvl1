@@ -1,10 +1,8 @@
 package hexlet.code.games;
 
-import java.util.HashMap;
-
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
-import hexlet.code.interfaces.GameDataKeys;
+import hexlet.code.interfaces.GameData;
 
 public final class Calc implements Game {
     private static final char PLUS = '+';
@@ -25,13 +23,13 @@ public final class Calc implements Game {
         System.out.println("What is the result of the expression?");
     }
 
-    public HashMap<GameDataKeys, String> run() {
-        HashMap<GameDataKeys, String> result = new HashMap<>();
+    public String[] run() {
+        String[] result = new String[2];
 
         int num1 = Utils.getRandomNumber();
         int num2 = Utils.getRandomNumber();
         char operator = this.getRandomOperator();
-        result.put(GameDataKeys.question, num1 + SEPARATOR + operator + SEPARATOR + num2);
+        result[GameData.question.getIdx()] = num1 + SEPARATOR + operator + SEPARATOR + num2;
 
         String answerValue;
         switch (operator) {
@@ -45,10 +43,9 @@ public final class Calc implements Game {
                 answerValue = String.valueOf(num1 * num2);
                 break;
             default:
-                answerValue = "";
-                break;
+                throw new Error("Operator " + operator + " is not handling!");
         }
-        result.put(GameDataKeys.answer, answerValue);
+        result[GameData.answer.getIdx()] = answerValue;
 
         return result;
     }

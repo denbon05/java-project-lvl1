@@ -1,10 +1,8 @@
 package hexlet.code.games;
 
-import java.util.HashMap;
-
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
-import hexlet.code.interfaces.GameDataKeys;
+import hexlet.code.interfaces.GameData;
 
 public final class Progression implements Game {
     private static final int MIN_PROGRESSION_LENGTH = 5;
@@ -18,8 +16,8 @@ public final class Progression implements Game {
         System.out.println("What number is missing in the progression?");
     }
 
-    public HashMap<GameDataKeys, String> run() {
-        HashMap<GameDataKeys, String> result = new HashMap<>();
+    public String[] run() {
+        String[] result = new String[2];
 
         int progressionLength = Utils.getRandomNumber(MIN_PROGRESSION_LENGTH, MAX_PROGRESSION_LENGTH);
         int gapIdx = Utils.getRandomNumber(0, progressionLength);
@@ -30,14 +28,14 @@ public final class Progression implements Game {
         for (int i = 0; i < progressionLength; i += 1) {
             if (i == gapIdx) {
                 progression[i] = GAP;
-                result.put(GameDataKeys.answer,  String.valueOf(progressionNum));
+                result[GameData.answer.getIdx()] =   String.valueOf(progressionNum);
             } else {
                 progression[i] = String.valueOf(progressionNum);
             }
             progressionNum += progressionStep;
         }
 
-        result.put(GameDataKeys.question, String.join(" ", progression));
+        result[GameData.question.getIdx()] =  String.join(" ", progression);
 
         return result;
     }

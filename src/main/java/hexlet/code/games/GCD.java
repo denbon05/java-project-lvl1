@@ -1,10 +1,8 @@
 package hexlet.code.games;
 
-import java.util.HashMap;
-
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
-import hexlet.code.interfaces.GameDataKeys;
+import hexlet.code.interfaces.GameData;
 
 public final class GCD implements Game {
     private int getGCD(int num1, int num2) {
@@ -15,12 +13,12 @@ public final class GCD implements Game {
         System.out.println("Find the greatest common divisor of given numbers.");
     }
 
-    public HashMap<GameDataKeys, String> run() {
-        HashMap<GameDataKeys, String> result = new HashMap<>();
+    public String[] run() {
+        String[] result = new String[2];
         int num1 = Utils.getRandomNumber();
         int num2 = Utils.getRandomNumber();
-        result.put(GameDataKeys.question, num1 + " " + num2);
-        result.put(GameDataKeys.answer, String.valueOf(getGCD(num1, num2)));
+        result[GameData.question.getIdx()] =  num1 + " " + num2;
+        result[GameData.answer.getIdx()] =  String.valueOf(getGCD(num1, num2));
 
         return result;
     }

@@ -22,41 +22,31 @@ public class App {
     private static final int PRIME_IDX = 6;
 
     private static Scanner scanner = new Scanner(System.in);
-    private static int gameNumber;
     private static String[] games = {
         "Exit", "Greet", "Even", "Calc", "GCD", "Progression", "Prime"
     };
 
     public static void main(String[] args) {
-
         System.out.println("Please enter the game number and press Enter.");
-        for (int i = 0; i < games.length; i += 1) {
-            if (EXIT_IDX == i) {
-                continue;
-            }
+        for (int i = 1; i < games.length; i += 1) {
             System.out.println(i + " - " + games[i]);
         }
         System.out.println(EXIT_IDX + " - " + games[EXIT_IDX]);
 
         System.out.print("Your choice: ");
-        gameNumber = scanner.nextShort();
+        var gameNumber = scanner.nextShort();
         System.out.println();
 
         if (gameNumber == EXIT_IDX) {
             return;
         }
 
-        Engine.greetingInGame();
-        String userName = Cli.promptUserName();
-        Engine.greetingUser(userName);
-
-        if (gameNumber == GREETING_IDX) {
-            return;
-        }
-
-        Engine.setUserName(userName);
-
         switch (gameNumber) {
+            case GREETING_IDX:
+                Engine.greetingInGame();
+                String userName = Cli.promptUserName();
+                Engine.greetingUser(userName);
+                break;
             case EVEN_IDX:
                 Engine.launchGame(new Even());
                 break;

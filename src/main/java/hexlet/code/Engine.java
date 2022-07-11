@@ -1,35 +1,34 @@
 package hexlet.code;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 import hexlet.code.interfaces.Game;
-import hexlet.code.interfaces.GameDataKeys;
+import hexlet.code.interfaces.GameData;
 
 public class Engine {
     private static Scanner scanner = new Scanner(System.in);
     private static final int ATTEMPTS_COUNT = 3;
-    private static String userName;
 
     public static void greetingInGame() {
         System.out.println("Welcome to the Brain Games!");
     }
 
-    public static void greetingUser(String name) {
-        System.out.println("Hello, " + name + "!");
-    }
-
-    public static void setUserName(String name) {
-        Engine.userName = name;
+    public static void greetingUser(String userName) {
+        System.out.println("Hello, " + userName + "!");
     }
 
     public static void launchGame(Game game) {
+        greetingInGame();
+        System.out.print("May I have your name? ");
+        String userName = scanner.next();
+        greetingUser(userName);
+
         game.displayRules();
 
         for (int attemptNum = 1; attemptNum <= ATTEMPTS_COUNT; attemptNum += 1) {
-            HashMap<GameDataKeys, String> gameData = game.run();
-            String question = gameData.get(GameDataKeys.question);
-            String correctAnswer = gameData.get(GameDataKeys.answer);
+            String[] gameData = game.run();
+            String question = gameData[GameData.question.getIdx()];
+            String correctAnswer = gameData[GameData.answer.getIdx()];
 
             System.out.println("Question: " + question);
             System.out.print("Your answer: ");

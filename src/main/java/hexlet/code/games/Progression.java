@@ -1,8 +1,8 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
-import hexlet.code.interfaces.GameData;
 
 public final class Progression implements Game {
     private static final int MIN_PROGRESSION_LENGTH = 5;
@@ -28,14 +28,14 @@ public final class Progression implements Game {
         for (int i = 0; i < progressionLength; i += 1) {
             if (i == gapIdx) {
                 progression[i] = GAP;
-                result[GameData.answer.getIdx()] =   String.valueOf(progressionNum);
+                result[Engine.ANSWER_IDX] =   String.valueOf(progressionNum);
             } else {
                 progression[i] = String.valueOf(progressionNum);
             }
             progressionNum += progressionStep;
         }
 
-        result[GameData.question.getIdx()] =  String.join(" ", progression);
+        result[Engine.QUESTION_IDX] =  String.join(" ", progression);
 
         return result;
     }

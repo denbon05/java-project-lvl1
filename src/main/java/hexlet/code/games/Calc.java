@@ -1,8 +1,8 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
-import hexlet.code.interfaces.GameData;
 
 public final class Calc implements Game {
     private static final char PLUS = '+';
@@ -29,7 +29,7 @@ public final class Calc implements Game {
         int num1 = Utils.getRandomNumber();
         int num2 = Utils.getRandomNumber();
         char operator = this.getRandomOperator();
-        result[GameData.question.getIdx()] = num1 + SEPARATOR + operator + SEPARATOR + num2;
+        result[Engine.QUESTION_IDX] = num1 + SEPARATOR + operator + SEPARATOR + num2;
 
         String answerValue;
         switch (operator) {
@@ -45,7 +45,7 @@ public final class Calc implements Game {
             default:
                 throw new Error("Operator " + operator + " is not handling!");
         }
-        result[GameData.answer.getIdx()] = answerValue;
+        result[Engine.ANSWER_IDX] = answerValue;
 
         return result;
     }

@@ -3,11 +3,13 @@ package hexlet.code;
 import java.util.Scanner;
 
 import hexlet.code.interfaces.Game;
-import hexlet.code.interfaces.GameData;
 
 public class Engine {
     private static Scanner scanner = new Scanner(System.in);
     private static final int ATTEMPTS_COUNT = 3;
+
+    public static final int QUESTION_IDX = 0;
+    public static final int ANSWER_IDX = 1;
 
     public static void greetingInGame() {
         System.out.println("Welcome to the Brain Games!");
@@ -27,8 +29,8 @@ public class Engine {
 
         for (int attemptNum = 1; attemptNum <= ATTEMPTS_COUNT; attemptNum += 1) {
             String[] gameData = game.run();
-            String question = gameData[GameData.question.getIdx()];
-            String correctAnswer = gameData[GameData.answer.getIdx()];
+            String question = gameData[Engine.QUESTION_IDX];
+            String correctAnswer = gameData[Engine.ANSWER_IDX];
 
             System.out.println("Question: " + question);
             System.out.print("Your answer: ");

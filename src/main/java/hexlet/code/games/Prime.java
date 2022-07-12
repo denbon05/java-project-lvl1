@@ -1,8 +1,8 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
-import hexlet.code.interfaces.GameData;
 
 public final class Prime implements Game {
     private String positiveAnswer = "yes";
@@ -29,8 +29,8 @@ public final class Prime implements Game {
     public String[] run() {
         String[] result = new String[2];
         int num = Utils.getRandomNumber();
-        result[GameData.question.getIdx()] =  String.valueOf(num);
-        result[GameData.answer.getIdx()] = getCorrectAnswer(num);
+        result[Engine.QUESTION_IDX] =  String.valueOf(num);
+        result[Engine.ANSWER_IDX] = getCorrectAnswer(num);
 
         return result;
     }

@@ -1,8 +1,8 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
 import hexlet.code.Utils;
 import hexlet.code.interfaces.Game;
-import hexlet.code.interfaces.GameData;
 
 public final class Even implements Game {
     private String positiveAnswer = "yes";
@@ -20,10 +20,10 @@ public final class Even implements Game {
         String[] result = new String[2];
 
         int num = Utils.getRandomNumber();
-        result[GameData.question.getIdx()] = String.valueOf(num);
+        result[Engine.QUESTION_IDX] = String.valueOf(num);
 
         boolean isEvenNum = this.isNumberEven(num);
-        result[GameData.answer.getIdx()] = isEvenNum ? positiveAnswer : negativeAnswer;
+        result[Engine.ANSWER_IDX] = isEvenNum ? positiveAnswer : negativeAnswer;
 
         return result;
     }

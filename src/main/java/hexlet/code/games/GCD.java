@@ -9,8 +9,8 @@ public final class GCD implements Game {
         return (num1 % num2) == 0 ? Math.abs(num2) : getGCD(num2, num1 % num2);
     }
 
-    public void displayRules() {
-        System.out.println("Find the greatest common divisor of given numbers.");
+    public String getRules() {
+        return "Find the greatest common divisor of given numbers.";
     }
 
     public String[] run() {

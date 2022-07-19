@@ -19,13 +19,17 @@ public class Engine {
         System.out.println("Hello, " + userName + "!");
     }
 
+    public static void displayRules(String rules) {
+        System.out.println(rules);
+    }
+
     public static void launchGame(Game game) {
         greetingInGame();
         System.out.print("May I have your name? ");
         String userName = scanner.next();
         greetingUser(userName);
 
-        game.displayRules();
+        displayRules(game.getRules());
 
         for (int attemptNum = 1; attemptNum <= ATTEMPTS_COUNT; attemptNum += 1) {
             String[] gameData = game.run();

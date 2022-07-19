@@ -12,8 +12,8 @@ public final class Progression implements Game {
 
     private static final String GAP = "..";
 
-    public void displayRules() {
-        System.out.println("What number is missing in the progression?");
+    public String getRules() {
+        return "What number is missing in the progression?";
     }
 
     public String[] run() {

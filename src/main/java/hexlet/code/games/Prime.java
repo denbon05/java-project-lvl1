@@ -22,8 +22,8 @@ public final class Prime implements Game {
         return positiveAnswer;
     }
 
-    public void displayRules() {
-        System.out.println("Answer 'yes' if given number is prime. Otherwise answer 'no'.");
+    public String getRules() {
+        return "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
     }
 
     public String[] run() {

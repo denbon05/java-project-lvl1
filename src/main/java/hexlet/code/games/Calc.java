@@ -19,8 +19,8 @@ public final class Calc implements Game {
         return operators[operatorIdx];
     }
 
-    public void displayRules() {
-        System.out.println("What is the result of the expression?");
+    public String getRules() {
+        return "What is the result of the expression?";
     }
 
     public String[] run() {
